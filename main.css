@@ -1,0 +1,112 @@
+@charset "utf-8";
+/* CSS Document */
+body,
+textarea,
+input{
+    font: 13px "Trebuchet MS", sans-serif;
+}
+
+.container{
+    width:330px;
+    margin: 0 auto;
+    margin-top:10%;
+    background-color: #F1F1F1;
+    border-radius:4px;
+}
+
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chat{
+    width:87%;
+    padding:10px;
+}
+
+.chat-messages,
+.chat textarea,
+.chat-name{
+    border:1px solid #bbb;
+    border-radius:3px;
+}
+
+.chat-messages{
+    width:100%;
+    height:300px;
+    overflow-y:scroll;
+    padding:10px;
+    line-height: 2;
+    background-color:white;
+}
+
+.chat-name {
+    width:100%;
+    padding:10px;
+    margin:0;
+    margin-bottom:10px;
+}
+.chat-messages{
+    margin-bottom:10px;
+}
+.chat textarea{
+    width:100%;
+    padding:10px;
+    margin:0;
+    max-width:100%;
+    background-color:#FAFAFA;
+}
+
+.chat-status{
+    color:#bbb;
+}
+
+.chat textarea,
+.chat-name{
+    outline:none;
+}
+
+.message_wrapper{
+    width:100%;
+    margin-bottom:10px;
+
+}
+
+.message_container{
+    background-color: #F1F1F1;
+    display:inline-block;
+    width:80%;
+    border-radius:2px;
+    overflow: hidden;
+    word-break:break-all;
+}
+
+header{
+    background-color: #DCDCDC;
+    height:23px;
+}
+
+.message_content{
+    padding-left:5px;
+    display:block;
+}
+
+.name{
+    font-weight: bold;
+    padding-left:7px;
+}
+
+.time{
+    font-size:10px;
+    float:right;
+    padding-right:6px;
+    margin-top: 3px;
+}
+
+.message_checkbox{
+    display:inline-block;
+    float:right;
+    margin:1px;
+    transform: scale(1);
+}

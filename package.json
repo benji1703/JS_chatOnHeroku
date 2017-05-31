@@ -1,0 +1,29 @@
+{
+  "name": "chat-js",
+  "version": "1.0.0",
+  "description": "nodejs chat",
+  "main": "server.js",
+  "dependencies": {
+    "mongodb": "^2.2.27",
+    "socket.io": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:57631/heroku_9706qqt0', function (err, db) {",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benji1703/chat-js.git"
+  },
+  "keywords": [
+    "chat",
+    "nodejs"
+  ],
+  "author": "Benjamin Arbibe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benji1703/chat-js/issues"
+  },
+  "homepage": "https://github.com/benji1703/chat-js#readme"
+}
