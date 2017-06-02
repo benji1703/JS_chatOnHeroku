@@ -4,6 +4,7 @@
   "description": "nodejs chat",
   "main": "server.js",
   "dependencies": {
+    "express": "^4.15.3",
     "mongodb": "^2.2.27",
     "socket.io": "^2.0.1"
   },

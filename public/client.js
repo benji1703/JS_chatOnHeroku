@@ -39,7 +39,8 @@
 
 
     try {
-        var socket = io.connect('https://chat-js-benji.herokuapp.com/');
+        alert("helppppp");
+        var socket = io.connect('http://localhost:8080');
     }
     catch(e) {
         setStatus("No Connection")

@@ -2,17 +2,34 @@
  * Created by benjaminarbibe on 27.5.2017.
  */
 
+const express = require('express');
+const app = express();
+var server = require('http').Server(app);
+
+
+//Change to cons
+
 var mongo = require('mongodb').MongoClient,
-    client = require('socket.io').listen(process.env.PORT || 8080).sockets,
+    client = require('socket.io')(server),
     objectid = require('mongodb').objectId;
+
+app.set('port', (process.env.PORT || 8080));
+
+app.use(express.static('public'));
+
+
+
 
 mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:57631/heroku_9706qqt0', function (err, db) {
     if(err) throw err;
+
+    console.log("Connected");
 
     client.on('connection', function(socket) {
 
         var col = db.collection('messages'),
             sendStatus = function(s) {
+                console.log("Connected to server?");
                 socket.emit('status', s);
             };
 
@@ -53,11 +70,12 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
 
         });
 
+
         // Remove by id
 
         socket.on('remove', function(id) {
             col.deleteOne(id.objectId, function () {
-                console.log("Test")
+                console.log("Test");
                 sendStatus({
                     message: "Message removed",
                     clear: true
@@ -66,4 +84,9 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
             });
         });
     });
+});
+
+
+app.listen(app.get('port'), function () {
+    console.log('running on port', app.get('port'))
 });
