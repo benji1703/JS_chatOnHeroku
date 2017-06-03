@@ -7,11 +7,11 @@
 
     $(document).on("click", ".message_checkbox", function(e){
         var id = e.currentTarget.dataset.id.toString();
-        var newid = id.substring(1, id.length-1);
+        alert(id);
         socket.emit('remove', {
-            _id: newid
+            _id: id
         })
-        location.reload();
+        //location.reload();
     });
 
     var getNode = function (s) {
@@ -62,9 +62,8 @@
                     message.innerHTML =
                         "<div class='message_wrapper'>" +
                         "<div class='message_container'>" +
-                        "</div><input data-id='" + data[x]._id + "' class='message_checkbox' type='button' value='Remove'/>" +
                         "<header><span class='name'>" + data[x].name + "</span><span class='time'>" + data[x].timesent +
-                        "</span></header>" +
+                        "</span></div><input data-id='" + data[x]._id + "' class='message_checkbox' type='button' value='Remove'/></header>" +
                         "<span class='message_content'>"+data[x].message+"</span>" +
                         "</div>";
 

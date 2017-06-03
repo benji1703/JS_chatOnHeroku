@@ -6,6 +6,7 @@ var express = require('express');
 var app = express();
 
 app.set('port', (process.env.PORT || 8080));
+
 var server = app.listen(app.get('port'), function () {
     console.log('running on port', app.get('port'))
 });
@@ -34,7 +35,6 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
 
         var col = db.collection('messages'),
             sendStatus = function (s) {
-                console.log("Connected to server?");
                 socket.emit('status', s);
             };
 
@@ -61,7 +61,7 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
 
             } else {
                 // Insert to mongoDB
-                col.insert({ name: name, message: message, timesent: timesent }, function () {
+                col.insert({ name: name, message: message, timesent: timesent}, function () {
 
                     // Emit the message to All connected clients
                     client.emit('output', [data]);
@@ -78,13 +78,12 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
 
         // Remove by id
 
-        socket.on('remove', function (id) {
-            col.deleteOne(id.objectId, function () {
+        socket.on('remove', function (req) {
+            col.deleteOne(req.objectId, function () {
                 sendStatus({
                     message: "Message removed",
                     clear: true
                 });
-
             });
         });
     });
