@@ -9,9 +9,9 @@
         var id = e.currentTarget.dataset.id.toString();
         alert(id);
         socket.emit('remove', {
-            _id: id
+            "_id": id
         })
-        //location.reload();
+        location.reload();
     });
 
     var getNode = function (s) {
@@ -103,7 +103,7 @@
                 socket.emit('input', {
                     name: name,
                     message: self.value,
-                    timesent: now
+                    timesent: now,
                 });
 
             }

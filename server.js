@@ -17,7 +17,7 @@ var client = require('socket.io').listen(server);
 //Change to cons
 
 var mongo = require('mongodb').MongoClient,
-    objectid = require('mongodb').objectId;
+    ObjectId = require('mongodb').ObjectId;
 
 
 
@@ -79,7 +79,11 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
         // Remove by id
 
         socket.on('remove', function (req) {
-            col.deleteOne(req.objectId, function () {
+            console.log(req);
+            console.log(req._id);
+            var newstr = req.ObjectId;
+            //console.log(newstr)
+            col.deleteOne({"_id" : ObjectId(req._id)}, function () {
                 sendStatus({
                     message: "Message removed",
                     clear: true
