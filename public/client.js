@@ -5,11 +5,12 @@
 
 (function() {
 
-    $(document).on("click", ".message_checkbox", function(e){
-        var id = e.currentTarget.dataset.id.toString();
-        alert(id);
+$(document)
+    .on("click", ".btn-danger", function (e) {
+        alert("Benji");
+        // Remove all 
         socket.emit('remove', {
-            "_id": id
+            "_id": "text"
         })
         location.reload();
     });
@@ -63,7 +64,7 @@
                         "<div class='message_wrapper'>" +
                         "<div class='message_container'>" +
                         "<header><span class='name'>" + data[x].name + "</span><span class='time'>" + data[x].timesent +
-                        "</span></div><input data-id='" + data[x]._id + "' class='message_checkbox' type='button' value='Remove'/></header>" +
+                        "</span></div></header>" +
                         "<span class='message_content'>"+data[x].message+"</span>" +
                         "</div>";
 

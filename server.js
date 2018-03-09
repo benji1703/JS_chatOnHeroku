@@ -13,18 +13,10 @@ var server = app.listen(app.get('port'), function () {
 
 var client = require('socket.io').listen(server);
 
-
-//Change to cons
-
-var mongo = require('mongodb').MongoClient,
+const mongo = require('mongodb').MongoClient,
     ObjectId = require('mongodb').ObjectId;
 
-
-
 app.use(express.static('public'));
-
-
-
 
 mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:57631/heroku_9706qqt0', function (err, db) {
     if (err) throw err;
@@ -39,7 +31,9 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
             };
 
         // Retrieve all the messages to the new socket
-        col.find().limit(100).sort({ _id: 1 }).toArray(function (err, res) {
+        col.find().limit(100).sort({
+            _id: 1
+        }).toArray(function (err, res) {
             if (err) throw err;
             socket.emit('output', res)
         });
@@ -55,13 +49,16 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
                 whitespaceCheck = /^\s*$/;
 
             // Checking the value before insert
-
             if (whitespaceCheck.test(name) || whitespaceCheck.test(message)) {
-                sendStatus('Name and Message cant be blank');
+                sendStatus('Name and/or Message can\'t be blank');
 
             } else {
                 // Insert to mongoDB
-                col.insert({ name: name, message: message, timesent: timesent}, function () {
+                col.insert({
+                    name: name,
+                    message: message,
+                    timesent: timesent
+                }, function () {
 
                     // Emit the message to All connected clients
                     client.emit('output', [data]);
@@ -75,15 +72,10 @@ mongo.connect('mongodb://heroku_9706qqt1:0sCKhna8zCQ881FM@ds157631.mlab.com:5763
 
         });
 
-
-        // Remove by id
+        // Clean all the chat window
 
         socket.on('remove', function (req) {
-            console.log(req);
-            console.log(req._id);
-            var newstr = req.ObjectId;
-            //console.log(newstr)
-            col.deleteOne({"_id" : ObjectId(req._id)}, function () {
+            col.drop(function () {
                 sendStatus({
                     message: "Message removed",
                     clear: true
